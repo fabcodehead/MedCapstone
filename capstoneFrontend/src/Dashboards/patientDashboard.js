@@ -16,8 +16,9 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 const PatientDashboard = ({ props, history }) => {
+  const location = { lat : 17.405057 , long :78.542475 }
   const [name, setName] = useState("");
-  const [location,setLocation] = useState({})
+  // const [location,setLocation] = useState({})
   const Name = JSON.parse(localStorage.getItem("jwt"));
   useEffect(() => {
     const Name = JSON.parse(localStorage.getItem("jwt"));
@@ -111,12 +112,12 @@ const PatientDashboard = ({ props, history }) => {
       .catch((err) => {
         console.log(err);
       });
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition( (pos) => {
-            console.log("Locationnnnnnnnnnnnnnn")
-            setLocation({lat : pos.coords.latitude,long : pos.coords.longitude})
-        } )
-      }
+      // if(navigator.geolocation){
+      //   navigator.geolocation.getCurrentPosition( (pos) => {
+      //       console.log("Locationnnnnnnnnnnnnnn")
+      //       setLocation({lat : pos.coords.latitude,long : pos.coords.longitude})
+      //   } )
+      // }
   }, [message, editDetails]);
 
   //   const patient_name = name
