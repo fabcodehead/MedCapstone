@@ -222,7 +222,7 @@ function OrgGraph({ history }) {
                   <Chart
                     className='chart'
                     labels={dateArr}
-                    name={'Blood Bugar'}
+                    name={'Blood Sugar'}
                     dataVal={blood_sugar}
                   />
                 </div>

@@ -214,7 +214,7 @@ function PatientGraph({ history }) {
                   <Chart
                     className='chart'
                     labels={dateArr}
-                    name={'Blood Bugar'}
+                    name={'Blood Sugar'}
                     dataVal={blood_sugar}
                   />
                 </div>
