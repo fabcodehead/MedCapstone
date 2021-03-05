@@ -171,9 +171,9 @@ function PatientPrescription({ history }) {
                               </h3>{' '}
                               <p>
                                 <strong>Medicine Name : </strong>
-                                {innerData.med_name} <br />
+                                {innerData.MedicineName} <br />
                                 <strong> Duration : </strong>
-                                {innerData.duration}
+                                {innerData.Duration}
                               </p>
                               <p>
                                 <strong>Dosage : </strong>
@@ -194,7 +194,7 @@ function PatientPrescription({ history }) {
                             ) : (
                               ''
                             )}
-                            {console.log(i, innerData.med_name)}
+                            {console.log(i, innerData.MedicineName)}
                           </div>
                         </div>
                       </li>

@@ -166,9 +166,9 @@ function OrgPrescription({ history }) {
                             </h3>{' '}
                             <p>
                               <strong>Medicine Name : </strong>
-                              {innerData.med_name} <br />
+                              {innerData.MedicineName} <br />
                               <strong> Duration : </strong>
-                              {innerData.duration}
+                              {innerData.Duration}
                             </p>
                             <p>
                               <strong>Dosage : </strong>
@@ -176,7 +176,7 @@ function OrgPrescription({ history }) {
                               {innerData.Evening_dosage}
                             </p>
                           </div>
-                          {i === 0 ? (
+                          {i >= 0 ? (
                             <div className='details'>
                               <div className='details__inner'>
                                 <h3>Prescribed by : Dr. {data.Doctor} </h3>
@@ -188,7 +188,7 @@ function OrgPrescription({ history }) {
                           ) : (
                             ''
                           )}
-                          {console.log(i, innerData.med_name)}
+                          {console.log(i, innerData.MedicineName)}
                         </div>
                       </div>
                     </li>

@@ -27,12 +27,18 @@ app.use((req, res, next) => {
 
 const PORT = process.env.PORT || 8000;
 
+app.use('/users', usersRouter);
+
+app.use('/catalog', catalogRouter);
+
+app.use("/api",hospRouter)
+
+         
 app.use(express.static(path.join(__dirname, "capstoneFrontend", "build")))
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "capstoneFrontend", "build", "index.html"));
 });
-
 
 app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
 
@@ -67,11 +73,6 @@ function validateUser(req, res, next) {
     
   }
 
-app.use('/users', usersRouter);
-
-app.use('/catalog', catalogRouter);
-
-app.use("/api",hospRouter)
 
 
 // catch 404 and forward to error handler
