@@ -10,7 +10,8 @@ const usersRouter = require('./routes/users');
 const catalogRouter = require('./routes/catalog');
 const hospRouter = require("./routes/Hosp");
 const path = require('path');
-const secret = process.env.JWT_SECRET || "local_dev"
+const secret = process.env.JWT_SECRET || 'local_dev'
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
@@ -25,28 +26,11 @@ app.use((req, res, next) => {
   next();
 });
 
-const PORT = process.env.PORT || 8000;
-
-app.use('/users', usersRouter);
-
-app.use('/catalog', catalogRouter);
-
-app.use("/api",hospRouter)
-
-         
-app.use(express.static(path.join(__dirname, "capstoneFrontend", "build")))
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "capstoneFrontend", "build", "index.html"));
-});
-
-app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
-
 // set up mongoose
 
-const LOCAL_DB = "mongodb://127.0.0.1:27017/medishare_db";
+const LOCAL_DB = 'mongodb://127.0.0.1:27017/medishare_db';
 mongoose.connect(
-  process.env.MONGODB_URL || LOCAL_DB,
+  process.env.MONGODB_URI || LOCAL_DB,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -54,7 +38,7 @@ mongoose.connect(
   },
   (err) => {
     if (err) throw err;
-    console.log("MongoDB connection established");
+    console.log('MongoDB connection established');
   }
 );
 
@@ -62,7 +46,7 @@ mongoose.connect(
 function validateUser(req, res, next) {
     jwt.verify(req.headers['x-access-token'], secret, function(err, decoded) {
       if (err) {
-        res.json({status:"error", message: err.message, data: null});
+        res.json({status: 'error', message: err.message, data: null});
       }else{
         // add user id to request
         req.body.id = decoded.id;
@@ -73,6 +57,26 @@ function validateUser(req, res, next) {
     
   }
 
+
+app.use('/users', usersRouter);
+
+app.use('/catalog', catalogRouter);
+
+app.use('/api', hospRouter)
+
+
+if(process.env.NODE_ENV === 'production')
+{
+app.use(express.static(path.join(__dirname, '/capstoneFrontend/build')))
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, 'capstoneFrontend', 'build', 'index.html'));
+});
+} else {
+ app.get('/', (req, res) => {
+    res.send('API running')
+  })
+}
 
 
 // catch 404 and forward to error handler
@@ -94,3 +98,7 @@ app.use(function(err, req, res, next) {
   });
   
 });
+
+
+
+app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));

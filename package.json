@@ -4,10 +4,10 @@
   "description": "medical data sharing project to send the medical data of patient during emergencies, operational procedures",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev": "concurrently \"nodemon index.js\" \"cd capstoneFrontend && npm run start\"",
-    "heroku-postbuild": "cd capstoneFrontend && npm install --only=dev && npm install && npm run build",
-    "test": "jest mocha chai "
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix capstoneFrontend && npm run build --prefix capstoneFrontend",
+    "test": "jest mocha chai"
   },
   "keywords": [
     "npm",
@@ -27,6 +27,7 @@
     "aws-sdk": "^2.835.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^6.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "cucumber": "^7.0.0-rc.0",
